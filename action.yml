@@ -2,10 +2,40 @@ name: slack-approval
 description: Custom action to send approval request to Slack from GitHub Actions
 author: varu3
 inputs:
+  baseMessageTs:
+    description: 'Target message ts to update instead of posting a new message'
+    required: false
+    default: ""
+  baseMessagePayload:
+    description: 'Base message payload to post. If empty, a default message is used.'
+    required: false
+    default: |
+      {}
+  successMessagePayload:
+    description: 'Message payload to post on approval. Defaults to baseMessagePayload.'
+    required: false
+    default: |
+      {}
+  failMessagePayload:
+    description: 'Message payload to post on rejection/cancel. Defaults to baseMessagePayload.'
+    required: false
+    default: |
+      {}
   custom-blocks:
     description: 'Custom blocks to display in Slack notification (JSON string)'
     required: false
     default: '[]'
+  approvers:
+    description: "A comma-separated list of approvers' Slack user IDs. If not set, anyone can approve."
+    required: false
+    default: ""
+  minimumApprovalCount:
+    description: "The minimum number of approvals required."
+    required: false
+    default: "1"
+outputs:
+  mainMessageTs:
+    description: 'Timestamp of the main message sent to Slack'
 runs:
   using: "node24"
   main: "dist/index.js"
