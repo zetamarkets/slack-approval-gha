@@ -135,15 +135,7 @@ async function run(): Promise<void> {
           },
           {
             type: 'mrkdwn',
-            text: `*GITHUB_RUN_ID:*\n${run_id}`,
-          },
-          {
-            type: 'mrkdwn',
             text: `*Workflow:*\n${workflow}`,
-          },
-          {
-            type: 'mrkdwn',
-            text: `*RunnerOS:*\n${runnerOS}`,
           },
         ],
       },
